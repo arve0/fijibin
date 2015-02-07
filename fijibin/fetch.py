@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-import sys, os
+import sys, os, stat, fijibin
 from io import BytesIO
 from zipfile import ZipFile
 try:
@@ -8,13 +8,11 @@ except ImportError:
     from zipfile import BadZipfile
     BadZipFile = BadZipfile
 
-home = os.path.expanduser('~')
-folder = os.path.join(home, '.bin')
 
 def fetch():
     "Fetch and extract latest Life-Line version of Fiji is just ImageJ to `~/.bin`."
-    if os.path.isdir(os.path.join(folder,'Fiji.app')):
-        print('Fiji.app already exists in ~/.bin, not downloading.')
+    if os.path.isdir(fijibin.FIJI_ROOT):
+        print('%s already exists, not downloading.' % fijibin.FIJI_ROOT)
         return
 
     try:
@@ -24,8 +22,7 @@ def fetch():
         # python 3
         from urllib.request import urlopen, HTTPError, URLError
 
-
-    url = 'http://fiji.sc/downloads/Life-Line/fiji-nojre-20141125.zip'
+    url = fijibin.URL
 
     try:
         print('Getting fiji from %s' % url)
@@ -56,7 +53,13 @@ def fetch():
     try:
         print('\nExtracting zip')
         z = ZipFile(fp)
-        z.extractall(folder)
+        z.extractall(fijibin.BIN_FOLDER)
+        # move to Fiji-VERSION.app to easily check if it exists (upon fijibin upgrade)
+        os.rename(fijibin.EXTRACT_FOLDER, fijibin.FIJI_ROOT)
     except (BadZipFile, IOError) as e:
         print('Error extracting zip: {}'.format(e))
         sys.exit(1)
+
+    for path in fijibin.BIN_NAMES.values():
+        st = os.stat(path)
+        os.chmod(path, st.st_mode | stat.S_IEXEC)

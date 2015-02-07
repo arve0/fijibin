@@ -20,14 +20,12 @@ class CustomInstall(install):
         install.run(self)
 
 setup(name='fijibin',
-      version='2014.11.25',
+      version='0.0.1',
       description='Latest Life-Line version of Fiji for easy inclusion in python projects.',
       author='Arve Seljebu',
       author_email='arve.seljebu@gmail.com',
       url='https://github.com/arve0/fijibin',
       license='MIT',
       packages=['fijibin'],
-      package_data={'': ['*']},
-      exclude_package_data={'': ['__pycache__']},
       long_description=long_description,
       cmdclass={'install': CustomInstall} )
