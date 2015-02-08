@@ -1,3 +1,6 @@
+# 0.0.2
+- use 64-bit Fiji if operating system is 64-bit
+
 # 0.0.1
 - use `BIN` as variable name
 - chmod +x for bin_names after fetch

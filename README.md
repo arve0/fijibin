@@ -15,7 +15,7 @@ pip install fijibin
 >>> fijibin.BIN
 '/Users/arve/.bin/Fiji.app/Contents/MacOS/ImageJ-macosx'
 >>> fijibin.VERSION
-'0.0.1'
+'0.0.2'
 >>> fijibin.FIJI_VERSION
 '20141125'
 ```

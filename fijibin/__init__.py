@@ -2,7 +2,7 @@
 Latest Life-Line version of fiji for easy inclusion in Python projects.
 """
 __all__ = []
-VERSION = '0.0.1'
+VERSION = '0.0.2'
 FIJI_VERSION = '20141125'
 URL = 'http://fiji.sc/downloads/Life-Line/fiji-nojre-20141125.zip'
 
