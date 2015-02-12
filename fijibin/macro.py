@@ -44,6 +44,9 @@ def run(macro, output_files=[], force_close=True):
     """
     if type(macro) == list:
         macro = ' '.join(macro)
+    if len(macro) == 0:
+        print('fijibin.macro.run got empty macro, exiting')
+        return
     if force_close:
         # make sure fiji halts immediately when done
         # hack: use error code 42 to check if macro has run sucessfully
