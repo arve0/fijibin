@@ -45,12 +45,14 @@ def run(macro, output_files=[], force_close=True):
     if type(macro) == list:
         macro = ' '.join(macro)
     if len(macro) == 0:
-        print('fijibin.macro.run got empty macro, exiting')
+        print('fijibin.macro.run got empty macro, not starting fiji')
         return
     if force_close:
         # make sure fiji halts immediately when done
         # hack: use error code 42 to check if macro has run sucessfully
         macro = macro + 'eval("script", "System.exit(42);");'
+
+    debug('macro {}'.format(macro))
 
     # avoid verbose output of Fiji when DEBUG environment variable set
     env = os.environ.copy()
@@ -164,9 +166,7 @@ def stitch(folder, filenames, x_size, y_size, output_filename,
     macro.append('image_output=[Fuse and display]");')
     # save to png
     macro.append('selectWindow("Fused");')
-    macro.append('run("PNG ...", "save=[{}]'.format(output_filename))
-    macro.append('imageiosaveas.codecname=png')
-    macro.append('imageiosaveas.filename=[{}]");'.format(output_filename))
+    macro.append('saveAs("PNG", "{}");'.format(output_filename))
     macro.append('close();')
 
     return ' '.join(macro)
