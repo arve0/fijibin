@@ -23,6 +23,13 @@ pip install fijibin
 `fijibin.BIN` will point to linux, mac or windows version, depending on the
 operating system detected via [platform](https://docs.python.org/3.4/library/platform.html).
 
+** run macros **
+```python
+import fijibin.macro
+macro.run(macro_string)
+```
+See more in the [API reference](http://fijibin.readthedocs.org/).
+
 ## Refetch binary
 ```python
 >>> from fijibin.fetch import fetch
