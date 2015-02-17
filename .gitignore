@@ -5,3 +5,4 @@ fijibin.egg-info
 .DS_Store
 README.rst
 *.pyc
+docs/_build
