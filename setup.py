@@ -27,5 +27,6 @@ setup(name='fijibin',
       url='https://github.com/arve0/fijibin',
       license='MIT',
       packages=['fijibin'],
+      install_requires=['pydebug'],
       long_description=long_description,
       cmdclass={'install': CustomInstall} )
