@@ -20,7 +20,7 @@ class CustomInstall(install):
         install.run(self)
 
 setup(name='fijibin',
-      version='0.0.3',
+      version='0.0.5',
       description='Latest Life-Line version of Fiji for easy inclusion in python projects.',
       author='Arve Seljebu',
       author_email='arve.seljebu@gmail.com',

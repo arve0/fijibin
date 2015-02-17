@@ -1,3 +1,9 @@
+# 0.0.5
+- macro.run: return existing output_files even if macro empty
+
+# 0.0.4
+- macro.stitch: support for 16 bit images
+
 # 0.0.3
 - add fijibin.macro
 
