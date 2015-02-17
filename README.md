@@ -3,6 +3,8 @@ This software will download the latest *Life-Line* version of
 [Fiji](http://fiji.sc/), make the correct cross-platform binary available and
 provide a macro submodule which makes automation of Fiji trivial from python.
 
+See the [video showing a demo of fijibin](http://youtu.be/v0q88SisBtw).
+
 Current Fiji Life-Line version in this package is **2014 November 25**.
 
 If you experience any trouble with this module, please
