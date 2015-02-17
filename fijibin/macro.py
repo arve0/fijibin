@@ -46,7 +46,7 @@ def run(macro, output_files=[], force_close=True):
         macro = ' '.join(macro)
     if len(macro) == 0:
         print('fijibin.macro.run got empty macro, not starting fiji')
-        return
+        return _exists(output_files)
     if force_close:
         # make sure fiji halts immediately when done
         # hack: use error code 42 to check if macro has run sucessfully
@@ -78,19 +78,13 @@ def run(macro, output_files=[], force_close=True):
 
     if force_close and proc.returncode != 42:
         print('fijibin ERROR: Fiji did not successfully ' +
-              'run this macro: {}.'.format(macro))
+              'run this macro: {}'.format(macro))
         if not debugging:
             print('fijibin Try running script with ' +
                   '`DEBUG=fijibin python your_script.py`')
 
-    # check output_files
-    for i,filename in enumerate(output_files):
-        if not os.path.isfile(filename):
-            print('fijibin ERROR missing output file {}'.format(filename))
-            del output_files[i]
-
-    return output_files
-
+    # return output_files which exists
+    return _exists(output_files)
 
 ##
 # Collection of macros
@@ -170,3 +164,30 @@ def stitch(folder, filenames, x_size, y_size, output_filename,
     macro.append('close();')
 
     return ' '.join(macro)
+
+
+##
+# Helper functions
+##
+def _exists(filenames):
+    """Check if every filename exists. If not, print an error
+    message and remove the item from the list.
+
+    Parameters
+    ----------
+    filenames : list
+        List of filenames to check for existence.
+
+    Returns
+    -------
+    list
+        Filtered list of filenames that exists.
+    """
+    exists = []
+    for filename in filenames:
+        if os.path.isfile(filename):
+            exists.append(filename)
+        else:
+            print('fijibin ERROR missing output file {}'.format(filename))
+
+    return exists
