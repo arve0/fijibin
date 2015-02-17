@@ -1,15 +1,20 @@
 # fijibin
-This software will download the latest *Life-Line* version of [Fiji](http://fiji.sc/)
-and make the binary easily available from python.
+This software will download the latest *Life-Line* version of
+[Fiji](http://fiji.sc/), make the correct cross-platform binary available and
+provide a macro submodule which makes automation of Fiji trivial from python.
 
 Current Fiji Life-Line version in this package is **2014 November 25**.
+
+If you experience any trouble with this module, please
+[submit an issue](https://github.com/arve0/fijibin/issues/new) or send a
+pull request on github.
 
 ## Install
 ```
 pip install fijibin
 ```
 
-## Use
+## Usage
 ```python
 >>> import fijibin
 >>> fijibin.BIN
@@ -23,14 +28,14 @@ pip install fijibin
 `fijibin.BIN` will point to linux, mac or windows version, depending on the
 operating system detected via [platform](https://docs.python.org/3.4/library/platform.html).
 
-** run macros **
+### Macros
 ```python
 import fijibin.macro
-macro.run(macro_string)
+macro.run(macro_string_or_list_of_strings)
 ```
 See more in the [API reference](http://fijibin.readthedocs.org/).
 
-## Refetch binary
+### Refetch binary
 ```python
 >>> from fijibin.fetch import fetch
 >>> fetch()
