@@ -33,10 +33,11 @@ operating system detected via [platform](https://docs.python.org/3.4/library/pla
 import fijibin.macro
 macro.run(macro_string_or_list_of_strings)
 ```
-See more in the [API reference](http://fijibin.readthedocs.org/).
 
 ### Refetch binary
 ```python
 >>> from fijibin.fetch import fetch
 >>> fetch()
 ```
+
+See more in the [API reference](http://fijibin.readthedocs.org/).
