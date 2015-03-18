@@ -3,7 +3,7 @@
 Run Fiji is just ImageJ macros headless with python.
 """
 import pydebug, subprocess, os, fijibin
-from tempfile import NamedTemporaryFile
+from tempfile import mkstemp
 
 # debug with DEBUG=fijibin python script.py
 debug = pydebug.debug('fijibin')
@@ -62,19 +62,23 @@ def run(macro, output_files=[], force_close=True):
             debugging = True
         del env['DEBUG']
 
-    with NamedTemporaryFile(mode='w', suffix='.ijm') as m:
-        m.write(macro)
-        m.flush() # make sure macro is written before running Fiji
+    fptr, temp_filename = mkstemp(suffix='.ijm')
+    m = os.fdopen(fptr, mode='w')
+    m.write(macro)
+    m.flush() # make sure macro is written before running Fiji
+    m.close()
 
-        cmd = [_bin, '--headless', '-macro', m.name]
-        proc = subprocess.Popen(cmd, stdout=subprocess.PIPE,
-                                stderr=subprocess.PIPE, env=env)
-        out, err = proc.communicate()
+    cmd = [_bin, '--headless', '-macro', temp_filename]
+    proc = subprocess.Popen(cmd, stdout=subprocess.PIPE,
+                            stderr=subprocess.PIPE, env=env)
+    out, err = proc.communicate()
 
-        for line in out.decode('latin1', errors='ignore').splitlines():
-            debug('stdout:' + line)
-        for line in err.decode('latin1', errors='ignore').splitlines():
-            debug('stderr:' + line)
+    os.remove(temp_filename)
+
+    for line in out.decode('latin1', errors='ignore').splitlines():
+        debug('stdout:' + line)
+    for line in err.decode('latin1', errors='ignore').splitlines():
+        debug('stderr:' + line)
 
     if force_close and proc.returncode != 42:
         print('fijibin ERROR: Fiji did not successfully ' +
