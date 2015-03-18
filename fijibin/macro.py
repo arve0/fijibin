@@ -2,7 +2,7 @@
 """
 Run Fiji is just ImageJ macros headless with python.
 """
-import pydebug, subprocess, os, fijibin
+import pydebug, subprocess, os, fijibin, re
 from tempfile import mkstemp
 
 # debug with DEBUG=fijibin python script.py
@@ -52,6 +52,10 @@ def run(macro, output_files=[], force_close=True):
         # hack: use error code 42 to check if macro has run sucessfully
         macro = macro + 'eval("script", "System.exit(42);");'
 
+    # escape backslashes (windows file names)
+    #                 not \ \  not \      g1 \\ g2
+    macro = re.sub(r"([^\\])\\([^\\])", r"\1\\\\\2", macro)
+
     debug('macro {}'.format(macro))
 
     # avoid verbose output of Fiji when DEBUG environment variable set
@@ -73,8 +77,6 @@ def run(macro, output_files=[], force_close=True):
                             stderr=subprocess.PIPE, env=env)
     out, err = proc.communicate()
 
-    os.remove(temp_filename)
-
     for line in out.decode('latin1', errors='ignore').splitlines():
         debug('stdout:' + line)
     for line in err.decode('latin1', errors='ignore').splitlines():
@@ -82,10 +84,14 @@ def run(macro, output_files=[], force_close=True):
 
     if force_close and proc.returncode != 42:
         print('fijibin ERROR: Fiji did not successfully ' +
-              'run this macro: {}'.format(macro))
+              'run macro {}'.format(temp_filename))
         if not debugging:
             print('fijibin Try running script with ' +
                   '`DEBUG=fijibin python your_script.py`')
+    else:
+        # only delete if everything is ok
+        os.remove(temp_filename)
+
 
     # return output_files which exists
     return _exists(output_files)
@@ -150,7 +156,7 @@ def stitch(folder, filenames, x_size, y_size, output_filename,
     macro.append('first_file_index_x={}'.format(x_start))
     macro.append('first_file_index_y={}'.format(y_start))
     macro.append('directory=[{}]'.format(folder))
-    macro.append('file_names={}'.format(filenames))
+    macro.append('file_names=[{}]'.format(filenames))
     macro.append('output_textfile_name=TileConfiguration.txt')
     macro.append('fusion_method=[Linear Blending]')
     macro.append('regression_threshold=0.30')
