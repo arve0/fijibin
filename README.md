@@ -23,8 +23,6 @@ pip install fijibin
 >>> import fijibin
 >>> fijibin.BIN
 '/Users/arve/.bin/Fiji.app/Contents/MacOS/ImageJ-macosx'
->>> fijibin.VERSION
-'0.0.5'
 >>> fijibin.FIJI_VERSION
 '20141125'
 ```
@@ -45,3 +43,28 @@ macro.run(macro_string_or_list_of_strings)
 ```
 
 See more in the [API reference](http://fijibin.readthedocs.org/).
+
+## Development
+Install dependencies and link development version of fijibin to pip:
+```bash
+git clone https://github.com/arve0/fijibin
+cd fijibin
+pip install -r requirements.txt
+```
+
+### run test
+```bash
+pip install tox
+tox
+```
+
+### extra output, jump into pdb upon error
+```bash
+DEBUG=fijibin tox -- --pdb -s
+```
+
+### build api reference
+```bash
+make docs
+```
+

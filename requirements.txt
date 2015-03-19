@@ -1,1 +1,5 @@
+wheel
 pydebug
+
+-r docs/requirements.txt
+-e .

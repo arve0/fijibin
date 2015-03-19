@@ -2,7 +2,8 @@
 Latest Life-Line version of fiji for easy inclusion in Python projects.
 """
 __all__ = []
-VERSION = '0.0.5'
+from os.path import join, dirname
+VERSION = open(join(dirname(__file__), 'VERSION')).read().strip()
 FIJI_VERSION = '20141125'
 BASE_URL = 'http://fiji.sc/downloads/Life-Line/fiji-'
 END_URL = '-' + FIJI_VERSION + '.zip'
