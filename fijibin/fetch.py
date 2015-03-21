@@ -12,7 +12,6 @@ except ImportError:
 def fetch():
     "Fetch and extract latest Life-Line version of Fiji is just ImageJ to `~/.bin`."
     if os.path.isdir(fijibin.FIJI_ROOT):
-        print('%s already exists, not downloading.' % fijibin.FIJI_ROOT)
         return
 
     try:
