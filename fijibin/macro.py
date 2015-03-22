@@ -2,13 +2,13 @@
 """
 Run Fiji is just ImageJ macros headless with python.
 """
-import pydebug, subprocess, os, fijibin, re
+import pydebug, subprocess, os, re
 from tempfile import mkstemp
+import fijibin
 
 # debug with DEBUG=fijibin python script.py
 debug = pydebug.debug('fijibin')
 
-_bin = fijibin.BIN
 
 ##
 # Running macros
@@ -72,7 +72,7 @@ def run(macro, output_files=[], force_close=True):
     m.flush() # make sure macro is written before running Fiji
     m.close()
 
-    cmd = [_bin, '--headless', '-macro', temp_filename]
+    cmd = [fijibin.BIN, '--headless', '-macro', temp_filename]
     proc = subprocess.Popen(cmd, stdout=subprocess.PIPE,
                             stderr=subprocess.PIPE, env=env)
     out, err = proc.communicate()
