@@ -159,7 +159,7 @@ def stitch(folder, filenames, x_size, y_size, output_filename,
     macro.append('file_names=[{}]'.format(filenames))
     macro.append('output_textfile_name=TileConfiguration.txt')
     macro.append('fusion_method=[Linear Blending]')
-    macro.append('regression_threshold=0.30')
+    macro.append('regression_threshold=0.20')
     macro.append('max/avg_displacement_threshold=2.50')
     macro.append('absolute_displacement_threshold=3.50')
     macro.append('compute_overlap')
