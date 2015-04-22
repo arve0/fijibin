@@ -6,3 +6,4 @@ fijibin.egg-info
 README.rst
 *.pyc
 docs/_build
+.tox
