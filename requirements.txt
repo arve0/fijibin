@@ -1,4 +1,5 @@
+# development requirements
 wheel
 
--r docs/requirements.txt
+# equivalent to ./setup develop
 -e .
