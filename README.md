@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/arve0/fijibin.svg)](https://travis-ci.org/arve0/fijibin)
 # fijibin
 This software will download the latest *Life-Line* version of
 [Fiji](http://fiji.sc/), make the correct cross-platform binary available and
