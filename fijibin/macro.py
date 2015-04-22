@@ -67,7 +67,7 @@ def run(macro, output_files=[], force_close=True):
         del env['DEBUG']
 
     fptr, temp_filename = mkstemp(suffix='.ijm')
-    m = os.fdopen(fptr, mode='w')
+    m = os.fdopen(fptr, 'w')
     m.write(macro)
     m.flush() # make sure macro is written before running Fiji
     m.close()
