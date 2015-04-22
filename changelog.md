@@ -1,3 +1,21 @@
+# 0.3.0
+- fix python2.7 os.fdopen error
+- add test
+- add travis testing
+
+# 0.2.1
+- include VERSION in source package
+
+# 0.2.0
+- download fiji on import instead of in setup.py (which never runs for
+  wheel installs)
+
+# 0.1.0
+- use pydebug for debugging messages
+- added API reference docs
+- fix JRE on windows
+- fix temp file permission trouble on windows
+
 # 0.0.5
 - macro.run: return existing output_files even if macro empty
 
