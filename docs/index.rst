@@ -12,15 +12,6 @@ main module: fijibin
 
 
 ************************
-submodule: fijibin.fetch
-************************
-.. automodule:: fijibin.fetch
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-
-************************
 submodule: fijibin.macro
 ************************
 .. automodule:: fijibin.macro
