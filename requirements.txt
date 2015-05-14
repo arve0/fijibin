@@ -1,5 +1,7 @@
 # development requirements
 wheel
+setuptools-git
+tox
 
 # equivalent to ./setup develop
 -e .

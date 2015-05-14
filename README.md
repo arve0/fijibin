@@ -55,7 +55,6 @@ pip install -r requirements.txt
 
 ### run test
 ```bash
-pip install tox
 tox
 ```
 

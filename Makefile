@@ -49,7 +49,7 @@ docs:
 release: clean rst tag
 	python setup.py sdist upload
 	python setup.py bdist_wheel upload
-	git push && git pt 
+	git push && git push --tags
 
 tag:
 	git tag v`cat fijibin/VERSION`
